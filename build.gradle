@@ -20,14 +20,16 @@ dependencies {
     jaxb 'javax.xml.bind:jaxb-api:2.2.7'
 }
 
+final resourceDir = 'src/main/resources'
+
 task downloadFreemindSchema(type: Download) {
     src 'http://freemind.cvs.sourceforge.net/viewvc/freemind/freemind/freemind.xsd'
-    dest buildDir
+    dest resourceDir
 }
 
 jaxb {
     final buildDirName = project.buildDir.name
-    xsdDir = buildDirName
+    xsdDir = resourceDir
     episodesDir = buildDirName
     xjc {
         generatePackage = 'freemind'
