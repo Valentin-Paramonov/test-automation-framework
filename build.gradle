@@ -57,7 +57,7 @@ shadowJar {
     baseName = 'taf'
     classifier = ''
     manifest {
-        attributes 'Main-Class': 'paramonov.valentine.taf.App'
+        attributes 'Main-Class': 'paramonov.valentine.taf.cli.App'
     }
     exclude '*.html'
     exclude '*.xsd'
