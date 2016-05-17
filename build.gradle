@@ -5,11 +5,11 @@ import org.codehaus.groovy.control.CompilerConfiguration
 import static org.codehaus.groovy.control.customizers.builder.CompilerCustomizationBuilder.withConfig
 
 plugins {
+    id 'groovy'
+    id 'com.github.johnrengelman.shadow' version '1.2.3'
     id 'de.undercouch.download' version '3.0.0'
     id 'com.github.jacobono.jaxb' version '1.3.5'
 }
-
-apply plugin: 'groovy'
 
 repositories {
     jcenter()
@@ -17,7 +17,7 @@ repositories {
 }
 
 dependencies {
-    compile 'org.codehaus.groovy:groovy-all:2.4.6'
+    compile 'org.codehaus.groovy:groovy:2.4.6'
     testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
     jaxb 'com.sun.xml.bind:jaxb-xjc:2.2.7-b41'
     jaxb 'com.sun.xml.bind:jaxb-impl:2.2.7-b41'
@@ -49,3 +49,15 @@ jaxb {
 
 xjc.dependsOn downloadFreemindSchema
 compileJava.dependsOn xjc
+
+shadowJar {
+    baseName = project.name
+    classifier = ''
+    manifest {
+        attributes 'Main-Class': 'paramonov.valentine.taf.App'
+    }
+    exclude '*.html'
+    exclude '*.xsd'
+}
+
+build.dependsOn shadowJar
