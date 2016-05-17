@@ -54,7 +54,7 @@ xjc.dependsOn downloadFreemindSchema
 compileJava.dependsOn xjc
 
 shadowJar {
-    baseName = project.name
+    baseName = 'taf'
     classifier = ''
     manifest {
         attributes 'Main-Class': 'paramonov.valentine.taf.App'
