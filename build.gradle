@@ -34,6 +34,9 @@ withConfig(config) {
 }
 
 task downloadFreemindSchema(type: Download) {
+    doFirst {
+        new File(resourceDir as String).mkdir()
+    }
     src 'http://freemind.cvs.sourceforge.net/viewvc/freemind/freemind/freemind.xsd'
     dest resourceDir
 }
