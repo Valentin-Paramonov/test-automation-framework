@@ -1,4 +1,8 @@
 import de.undercouch.gradle.tasks.download.Download
+import groovy.transform.CompileStatic
+import org.codehaus.groovy.control.CompilerConfiguration
+
+import static org.codehaus.groovy.control.customizers.builder.CompilerCustomizationBuilder.withConfig
 
 plugins {
     id 'de.undercouch.download' version '3.0.0'
@@ -20,7 +24,14 @@ dependencies {
     jaxb 'javax.xml.bind:jaxb-api:2.2.7'
 }
 
-final resourceDir = 'src/main/resources'
+ext {
+    resourceDir = 'src/main/resources'
+}
+
+def config = new CompilerConfiguration()
+withConfig(config) {
+    ast(CompileStatic)
+}
 
 task downloadFreemindSchema(type: Download) {
     src 'http://freemind.cvs.sourceforge.net/viewvc/freemind/freemind/freemind.xsd'
