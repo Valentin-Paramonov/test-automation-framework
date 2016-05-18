@@ -1,4 +1,4 @@
-package paramonov.valentine.taf
+package paramonov.valentine.taf.suite
 
 class Request {
     String method

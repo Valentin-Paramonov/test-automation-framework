@@ -3,7 +3,7 @@ package paramonov.valentine.taf.cli
 import freemind.Map
 import groovy.transform.PackageScope
 import org.apache.commons.cli.ParseException
-import paramonov.valentine.taf.SuiteParser
+import paramonov.valentine.taf.suite.SuiteParser
 
 import javax.xml.bind.JAXBContext
 

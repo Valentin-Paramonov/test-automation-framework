@@ -1,5 +1,7 @@
 package paramonov.valentine.taf
 
+import paramonov.valentine.taf.suite.Suite
+
 class Taf {
     interface TestResultPrinter {
         void print(TestCaseResult result)

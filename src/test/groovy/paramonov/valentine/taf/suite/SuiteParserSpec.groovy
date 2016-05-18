@@ -1,4 +1,4 @@
-package paramonov.valentine.taf
+package paramonov.valentine.taf.suite
 
 import spock.lang.Specification
 
