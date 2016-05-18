@@ -16,12 +16,12 @@ class ArgParser {
             cli.usage()
             throw new ParseException('No scenario file provided!')
         }
-        options.arguments().first().with { scenarioFile ->
-            if (!new File(scenarioFile).exists()) {
+        options.arguments().first().with { suiteFile ->
+            if (!new File(suiteFile).exists()) {
                 cli.usage()
-                throw new FileNotFoundException("$scenarioFile does not exist!")
+                throw new FileNotFoundException("$suiteFile does not exist!")
             }
-            return parsed(unmarshalled(scenarioFile))
+            return parsed(unmarshalled(suiteFile))
         }
     }
 
@@ -29,11 +29,11 @@ class ArgParser {
         new CliBuilder(usage: 'taf scenario.mm')
     }
 
-    private static unmarshalled(String scenarioFilePath) {
+    private static unmarshalled(String suiteFilePath) {
         try {
-            JAXBContext.newInstance('freemind').createUnmarshaller().unmarshal(new File(scenarioFilePath)) as Map
+            JAXBContext.newInstance('freemind').createUnmarshaller().unmarshal(new File(suiteFilePath)) as Map
         } catch (exception) {
-            throw new ParseException("Failed to parse $scenarioFilePath: $exception.cause.message")
+            throw new ParseException("Failed to parse $suiteFilePath: $exception.cause.message")
         }
     }
 
