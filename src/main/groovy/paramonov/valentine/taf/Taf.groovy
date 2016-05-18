@@ -1,7 +1,5 @@
 package paramonov.valentine.taf
 
-import freemind.Map
-
 class Taf {
     interface TestResultPrinter {
         void print(TestCaseResult result)
@@ -13,6 +11,6 @@ class Taf {
         this.resultPrinter = resultPrinter
     }
 
-    void run(Scenario scenario) {
+    void run(Suite scenario) {
     }
 }

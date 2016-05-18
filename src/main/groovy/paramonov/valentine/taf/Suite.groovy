@@ -1,4 +1,4 @@
 package paramonov.valentine.taf
 
-class Scenario {
+class Suite {
 }

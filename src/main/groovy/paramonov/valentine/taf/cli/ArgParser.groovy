@@ -3,7 +3,7 @@ package paramonov.valentine.taf.cli
 import freemind.Map
 import groovy.transform.PackageScope
 import org.apache.commons.cli.ParseException
-import paramonov.valentine.taf.ScenarioParser
+import paramonov.valentine.taf.SuiteParser
 
 import javax.xml.bind.JAXBContext
 
@@ -37,7 +37,7 @@ class ArgParser {
         }
     }
 
-    private static parsed(Map scenario) {
-        ScenarioParser.parse(scenario)
+    private static parsed(Map suite) {
+        SuiteParser.parse(suite)
     }
 }
