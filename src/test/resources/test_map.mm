@@ -5,7 +5,7 @@
             <node TEXT="Method: GET"/>
             <node TEXT="Path: /a/b/c"/>
         </node>
-        <node TEXT="Test Case">
+        <node TEXT="Test: Test Case">
             <node TEXT="param1: 420"/>
             <node TEXT="param2: 69"/>
             <node TEXT="result: 1337"/>

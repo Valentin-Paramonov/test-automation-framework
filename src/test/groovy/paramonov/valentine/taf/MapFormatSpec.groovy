@@ -19,7 +19,7 @@ class MapFormatSpec extends Specification {
             requestNode.TEXT == 'Request'
             requestNode.arrowlinkOrCloudOrEdge.collect { (it as Node).TEXT } == ['Method: GET', 'Path: /a/b/c']
             def testCaseNode = scenarioNode.arrowlinkOrCloudOrEdge.last() as Node
-            testCaseNode.TEXT == 'Test Case'
+            testCaseNode.TEXT == 'Test: Test Case'
             testCaseNode.arrowlinkOrCloudOrEdge.collect { (it as Node).TEXT } == ['param1: 420', 'param2: 69', 'result: 1337']
     }
 }
