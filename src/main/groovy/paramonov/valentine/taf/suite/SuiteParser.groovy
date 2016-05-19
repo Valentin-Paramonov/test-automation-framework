@@ -5,9 +5,11 @@ import freemind.Node
 import org.apache.commons.cli.ParseException
 
 class SuiteParser {
+    static final httpMethods = 'GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE'
+
     static Suite parse(Map suite) {
         new Suite(
-            name: suite?.node?.TEXT ?: { error('Expected suite name') }(),
+            name: suite?.node?.TEXT,
             scenarios: childNodes(suite?.node)?.collect { parseScenario(it) })
     }
 
@@ -36,9 +38,9 @@ class SuiteParser {
     }
 
     private static String parseMethod(Node method) {
-        def textMatcher = method.TEXT =~ /^Method:\s*(GET|POST)$/
+        def textMatcher = method.TEXT =~ /^Method:\s*($httpMethods)$/
         if (!textMatcher.matches()) {
-            error('Invalid pattern in method node! Expected "Method: <GET|POST>"')
+            error(/Invalid pattern in method node! Expected "Method: <$httpMethods>"/)
         }
         textMatcher.group(1)
     }
