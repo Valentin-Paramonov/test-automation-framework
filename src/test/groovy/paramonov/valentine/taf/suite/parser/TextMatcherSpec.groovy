@@ -1,7 +1,5 @@
-package paramonov.valentine.taf.suite
+package paramonov.valentine.taf.suite.parser
 
-import paramonov.valentine.taf.suite.parser.SuiteParseException
-import paramonov.valentine.taf.suite.parser.TextMatcher
 import spock.lang.Specification
 
 class TextMatcherSpec extends Specification {

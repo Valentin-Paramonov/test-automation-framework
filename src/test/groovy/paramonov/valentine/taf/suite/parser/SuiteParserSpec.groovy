@@ -1,6 +1,5 @@
-package paramonov.valentine.taf.suite
+package paramonov.valentine.taf.suite.parser
 
-import paramonov.valentine.taf.suite.parser.SuiteParser
 import spock.lang.Specification
 
 import static paramonov.valentine.taf.MapLoader.loadMapFrom
