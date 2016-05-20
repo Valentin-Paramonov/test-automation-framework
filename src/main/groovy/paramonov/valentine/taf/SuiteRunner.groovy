@@ -2,14 +2,16 @@ package paramonov.valentine.taf
 
 import paramonov.valentine.taf.suite.Suite
 
-class Taf {
+import javax.inject.Inject
+
+class SuiteRunner {
     interface TestResultPrinter {
-        void print(TestCaseResult result)
     }
 
     private final resultPrinter
 
-    Taf(TestResultPrinter resultPrinter) {
+    @Inject
+    SuiteRunner(TestResultPrinter resultPrinter) {
         this.resultPrinter = resultPrinter
     }
 

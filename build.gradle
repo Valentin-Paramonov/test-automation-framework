@@ -9,6 +9,7 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '1.2.3'
     id 'de.undercouch.download' version '3.0.0'
     id 'com.github.jacobono.jaxb' version '1.3.5'
+    id "net.ltgt.apt" version "0.6"
 }
 
 repositories {
@@ -19,6 +20,8 @@ repositories {
 dependencies {
     compile 'org.codehaus.groovy:groovy:2.4.6'
     compile 'commons-cli:commons-cli:1.3.1'
+    compile 'com.squareup.dagger:dagger:1.2.5'
+    apt 'com.squareup.dagger:dagger-compiler:1.2.5'
     testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
     jaxb 'com.sun.xml.bind:jaxb-xjc:2.2.7-b41'
     jaxb 'com.sun.xml.bind:jaxb-impl:2.2.7-b41'
@@ -32,6 +35,10 @@ ext {
 def config = new CompilerConfiguration()
 withConfig(config) {
     ast(CompileStatic)
+}
+
+compileGroovy {
+    groovyOptions.javaAnnotationProcessing = true
 }
 
 task downloadFreemindSchema(type: Download) {
