@@ -5,14 +5,14 @@ import paramonov.valentine.taf.SuiteRunner
 
 import static java.lang.System.err
 import static java.lang.System.exit
-import static paramonov.valentine.taf.cli.ArgParser.scenarioFrom
+import static paramonov.valentine.taf.cli.ArgParser.suiteFrom
 
 class App {
     static main(args) {
         try {
             ObjectGraph.create(new CliModule())
                        .get(SuiteRunner)
-                       .run(scenarioFrom(args))
+                       .run(suiteFrom(args))
         } catch (exception) {
             err.println exception.message
             exit(1)
