@@ -1,13 +1,25 @@
 package paramonov.valentine.taf.cli
 
 import groovy.transform.PackageScope
-import paramonov.valentine.taf.Taf
-import paramonov.valentine.taf.TestCaseResult
+import paramonov.valentine.taf.ScenarioResult
+import paramonov.valentine.taf.SuiteRunner
+import paramonov.valentine.taf.suite.Suite
 
 @PackageScope
-class CliTestResultPrinter implements Taf.TestResultPrinter {
+class CliTestResultPrinter implements SuiteRunner.TestResultPrinter {
     @Override
-    void print(TestCaseResult result) {
-        println result
+    void startSuite(Suite suite) {
+        println suite.name
+    }
+
+    @Override
+    void printError(String message) {
+        System.err.println "Error: $message"
+    }
+
+    @Override
+    void scenarioCompleted(ScenarioResult result) {
+        result.results.each {println it.name}
+        println "Completed: $result.scenario.name"
     }
 }

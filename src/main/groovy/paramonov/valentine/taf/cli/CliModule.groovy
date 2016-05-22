@@ -5,11 +5,14 @@ import dagger.Provides
 import groovy.transform.PackageScope
 import paramonov.valentine.taf.SuiteRunner
 import paramonov.valentine.taf.SuiteRunner.TestResultPrinter
+import paramonov.valentine.taf.TafModule
 
-@Module(injects = SuiteRunner)
+import javax.inject.Singleton
+
 @PackageScope
+@Module(includes = TafModule, injects = SuiteRunner)
 class CliModule {
-    @Provides TestResultPrinter provideTestResultPrinter() {
+    @Provides @Singleton TestResultPrinter testResultPrinter() {
         new CliTestResultPrinter()
     }
 }
