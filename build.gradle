@@ -24,6 +24,8 @@ dependencies {
     compile 'com.squareup.dagger:dagger:1.2.5'
     apt 'com.squareup.dagger:dagger-compiler:1.2.5'
     testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
+    testCompile 'cglib:cglib-nodep:3.2.2'
+    testCompile 'org.objenesis:objenesis:2.3'
     jaxb 'com.sun.xml.bind:jaxb-xjc:2.2.7-b41'
     jaxb 'com.sun.xml.bind:jaxb-impl:2.2.7-b41'
     jaxb 'javax.xml.bind:jaxb-api:2.2.7'
