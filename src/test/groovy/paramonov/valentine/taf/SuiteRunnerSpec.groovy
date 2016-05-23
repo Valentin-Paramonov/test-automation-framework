@@ -9,7 +9,7 @@ import java.util.concurrent.ExecutorService
 import static rx.Observable.empty
 
 class SuiteRunnerSpec extends Specification {
-    def printer = Mock(SuiteRunner.TestResultPrinter)
+    def printer = Mock(SuiteRunner.Printer)
     def scenarioRunner = Mock(ScenarioRunner)
     def executor = Mock(ExecutorService)
     def suiteRunner = new SuiteRunner(printer, scenarioRunner, executor)

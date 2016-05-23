@@ -6,7 +6,7 @@ import paramonov.valentine.taf.SuiteRunner
 import paramonov.valentine.taf.suite.Suite
 
 @PackageScope
-class CliTestResultPrinter implements SuiteRunner.TestResultPrinter {
+class CliPrinter implements SuiteRunner.Printer {
     @Override
     void startSuite(Suite suite) {
         println suite.name
