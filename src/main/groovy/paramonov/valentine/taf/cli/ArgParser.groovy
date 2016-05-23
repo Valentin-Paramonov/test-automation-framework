@@ -3,17 +3,17 @@ package paramonov.valentine.taf.cli
 import freemind.Map
 import groovy.transform.PackageScope
 import org.apache.commons.cli.ParseException
-import paramonov.valentine.taf.suite.parser.SuiteParser
 
 import javax.xml.bind.JAXBContext
 
 import static java.lang.System.exit
+import static paramonov.valentine.taf.suite.parser.SuiteParser.parse
 
 @PackageScope
 class ArgParser {
     static suiteFrom(args) {
-        def cli = cli()
-        def options = cli.parse(args)
+        final cli = cli()
+        final options = cli.parse(args)
         if (!options) {
             exit(1)
         }
@@ -33,7 +33,7 @@ class ArgParser {
     }
 
     private static cli() {
-        def cli = new CliBuilder(usage: 'taf -b <base-url> scenario.mm')
+        final cli = new CliBuilder(usage: 'taf -b <base-url> scenario.mm')
         cli.b(longOpt: 'base-url', 'The base url of the service to test', args: 1, argName: 'service to test', required: true)
         cli
     }

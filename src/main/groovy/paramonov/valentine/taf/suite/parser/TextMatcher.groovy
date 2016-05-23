@@ -18,7 +18,7 @@ class TextMatcher {
         { pattern ->
             { expectedText ->
                 { ->
-                    def textMatcher = text =~ pattern
+                    final textMatcher = text =~ pattern
                     if (!textMatcher.matches()) {
                         throw new SuiteParseException(/Invalid pattern in result node! Expected: "$expectedText", got: "$text"/)
                     }

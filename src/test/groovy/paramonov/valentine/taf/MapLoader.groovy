@@ -6,7 +6,7 @@ import javax.xml.bind.JAXBContext
 
 class MapLoader {
     static Map loadMapFrom(String resourcePath) {
-        def map = MapLoader.classLoader.getResource(resourcePath)
+        final map = MapLoader.classLoader.getResource(resourcePath)
         JAXBContext.newInstance('freemind').createUnmarshaller().unmarshal(map) as Map
     }
 }

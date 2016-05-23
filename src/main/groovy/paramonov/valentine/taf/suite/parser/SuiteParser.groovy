@@ -30,7 +30,7 @@ class SuiteParser {
         match(request.TEXT).toPattern('Request')
                            .expect('a request node')
                            .matches()
-        def childNodes = childNodes(request)
+        final childNodes = childNodes(request)
         if (childNodes.size() != 2) {
             throw new SuiteParseException('Expected the Request node to have two child nodes')
         }

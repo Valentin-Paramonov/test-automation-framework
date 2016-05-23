@@ -35,7 +35,7 @@ ext {
     resourceDir = 'src/main/resources'
 }
 
-def config = new CompilerConfiguration()
+final config = new CompilerConfiguration()
 withConfig(config) {
     ast(CompileStatic)
 }
