@@ -9,14 +9,14 @@ class SuiteParserSpec extends Specification {
         given:
             def rawSuite = loadMapFrom('test_map.mm')
         when:
-            def suite = SuiteParser.parse(rawSuite)
+            def suite = SuiteParser.parse(rawSuite, 'http://base/')
         then:
             suite.name == 'Test Suite'
             def scenario = suite.scenarios.first()
             scenario.name == 'Test Scenario'
-            scenario.request.method == 'GET'
-            scenario.request.path == '/a/b/c'
             def testCase = scenario.testCases.first()
+            testCase.request.method == 'GET'
+            testCase.request.path == 'http://base/a/b/c'
             testCase.description == 'Test Case'
             testCase.parameters == [param1: '420', param2: '69']
             testCase.expectedResult == '1337'

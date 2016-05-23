@@ -26,9 +26,8 @@ class ArgParser {
                 cli.usage()
                 throw new FileNotFoundException("$suiteFile does not exist!")
             }
-            def suite = parsed(unmarshalled(suiteFile))
-            suite.baseUrl = options.b
-            return suite
+            final baseUrl = options.b
+            parse(unmarshalled(suiteFile), baseUrl)
         }
     }
 
@@ -44,9 +43,5 @@ class ArgParser {
         } catch (exception) {
             throw new ParseException("Failed to parse $suiteFilePath: $exception.cause.message")
         }
-    }
-
-    private static parsed(Map suite) {
-        SuiteParser.parse(suite)
     }
 }
