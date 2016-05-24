@@ -1,5 +1,8 @@
 package paramonov.valentine.taf
 
+import paramonov.valentine.taf.suite.TestCase
+
 class TestCaseResult {
-    String name
+    TestCase testCase
+    String result
 }

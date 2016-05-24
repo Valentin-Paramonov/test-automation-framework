@@ -19,7 +19,11 @@ class CliPrinter implements SuiteRunner.Printer {
 
     @Override
     void scenarioCompleted(ScenarioResult result) {
-        result.results.each {println it.name}
-        println "Completed: $result.scenario.name"
+        println "o $result.scenario.name"
+        result.testCaseResults.each {
+            println """||- $it.testCase.description
+                       ||  ${it.testCase.parameters.collect { k, v -> "$k: $v" }.join(', ')}
+                       ||  expected: $it.testCase.expectedResult, got: $it.result""".stripMargin()
+        }
     }
 }
