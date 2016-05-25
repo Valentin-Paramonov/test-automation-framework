@@ -4,5 +4,5 @@ import paramonov.valentine.taf.suite.Scenario
 
 class ScenarioResult {
     Scenario scenario
-    List<TestCaseResult> results
+    List<TestCaseResult> testCaseResults
 }

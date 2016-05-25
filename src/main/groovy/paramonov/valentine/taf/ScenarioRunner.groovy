@@ -24,10 +24,18 @@ class ScenarioRunner {
                         .collect(testCaseRunner.&run)
                         .inject { Observable cases, testCase -> cases.mergeWith(testCase) }
                         .toList()
-                        .subscribe {
-                            subscriber.onNext(new ScenarioResult(scenario: scenario, results: it))
-                            subscriber.onCompleted()
+                        .doOnNext {
+                            if (!subscriber.unsubscribed) {
+                                subscriber.onNext(new ScenarioResult(scenario: scenario, testCaseResults: it))
+                                subscriber.onCompleted()
+                            }
                         }
+                        .doOnError {
+                            if (!subscriber.unsubscribed) {
+                                subscriber.onError(it)
+                            }
+                        }
+                        .subscribe()
             }
         } as Observable.OnSubscribe)
     }
