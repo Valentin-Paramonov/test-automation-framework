@@ -30,7 +30,14 @@ class SuiteRunner {
              .collect(scenarioRunner.&run)
              .inject { Observable scenarios, scenario -> scenarios.mergeWith(scenario) }
              .doOnCompleted(this.&finish)
-             .subscribe({ printer.scenarioCompleted(it) }, { printer.printError(it.message) })
+             .doOnNext(printer.&scenarioCompleted)
+             .doOnError(this.&onError)
+             .subscribe()
+    }
+
+    private onError(Throwable error) {
+        printer.printError(error.message)
+        finish()
     }
 
     private finish() {
