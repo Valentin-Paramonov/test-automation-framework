@@ -1,7 +1,6 @@
 package paramonov.valentine.taf
 
 import groovyx.net.http.RESTClient
-import paramonov.valentine.taf.suite.Request
 import paramonov.valentine.taf.suite.TestCase
 import rx.Observable
 import rx.Subscriber
@@ -11,17 +10,19 @@ import java.util.concurrent.ExecutorService
 
 class TestCaseRunner {
     private final ExecutorService executor
+    private final RESTClient client
 
     @Inject
-    TestCaseRunner(ExecutorService executor) {
+    TestCaseRunner(ExecutorService executor, RESTClient client) {
         this.executor = executor
+        this.client = client
     }
 
     Observable<TestCaseResult> run(TestCase testCase) {
         Observable.create({ Subscriber subscriber ->
             executor.submit {
                 try {
-                    final response = performRequest(testCase.request)(query: testCase.parameters)
+                    final response = client."${testCase.request.method.toLowerCase()}"(query: testCase.parameters)
                     if (!subscriber.unsubscribed) {
                         subscriber.onNext(new TestCaseResult(testCase: testCase, result: response.data.result))
                         subscriber.onCompleted()
@@ -32,10 +33,6 @@ class TestCaseRunner {
                     }
                 }
             }
-      } as Observable.OnSubscribe)
-    }
-
-    private static Closure performRequest(Request request) {
-        new RESTClient(request.path).&"${request.method.toLowerCase()}"
+        } as Observable.OnSubscribe)
     }
 }

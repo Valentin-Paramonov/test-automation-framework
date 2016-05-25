@@ -12,24 +12,24 @@ import static TextMatcher.match
 class SuiteParser {
     static final httpMethods = 'GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE'
 
-    static Suite parse(Map suite, String baseUrl) {
+    static Suite parsed(Map suite) {
         new Suite(name: suite?.node?.TEXT,
-                  scenarios: childNodes(suite?.node)?.collect { parseScenario(it, baseUrl.replaceAll('/$', '')) })
+                  scenarios: childNodes(suite?.node)?.collect(this.&parseScenario))
     }
 
     private static childNodes(Node node) {
         node?.arrowlinkOrCloudOrEdge?.findAll { it.class == Node }?.collect { it as Node } ?: []
     }
 
-    private static Scenario parseScenario(Node scenario, String baseUrl) {
+    private static Scenario parseScenario(Node scenario) {
         final childNodes = childNodes(scenario)
-        final request = parseRequest(childNodes.first(), baseUrl)
+        final request = parseRequest(childNodes.first())
         new Scenario(name: scenario.TEXT,
                      testCases: childNodes.tail()
                                           .collect { parseTestCase(it, request) })
     }
 
-    private static Request parseRequest(Node request, String baseUrl) {
+    private static Request parseRequest(Node request) {
         match(request.TEXT).toPattern('Request')
                            .expect('a request node')
                            .matches()
@@ -37,7 +37,7 @@ class SuiteParser {
         if (childNodes.size() != 2) {
             throw new SuiteParseException('Expected the Request node to have two child nodes')
         }
-        new Request(method: parseMethod(childNodes.first()), path: "$baseUrl${parsePath(childNodes.last())}")
+        new Request(method: parseMethod(childNodes.first()), path: parsePath(childNodes.last()))
     }
 
     private static String parseMethod(Node method) {
