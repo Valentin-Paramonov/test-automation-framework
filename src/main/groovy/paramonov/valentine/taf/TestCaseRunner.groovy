@@ -22,7 +22,8 @@ class TestCaseRunner {
         Observable.create({ Subscriber subscriber ->
             executor.submit {
                 try {
-                    final response = client."${testCase.request.method.toLowerCase()}"(query: testCase.parameters)
+                    final request = testCase.request
+                    final response = client."${request.method.toLowerCase()}"(path: request.path, query: testCase.parameters)
                     if (!subscriber.unsubscribed) {
                         subscriber.onNext(new TestCaseResult(testCase: testCase, result: response.data.result))
                         subscriber.onCompleted()
