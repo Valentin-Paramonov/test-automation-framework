@@ -2,6 +2,7 @@ package paramonov.valentine.taf
 
 import groovy.transform.PackageScope
 import groovyx.net.http.RESTClient
+import paramonov.valentine.taf.suite.Request
 import paramonov.valentine.taf.suite.TestCase
 import paramonov.valentine.taf.suite.TestCaseResult
 import rx.Observable
@@ -26,9 +27,9 @@ class TestCaseRunner {
             executor.submit {
                 try {
                     final request = testCase.request
-                    final response = client."${request.method.toLowerCase()}"(path: request.path, query: testCase.parameters)
+                    final result = performRequest(request, testCase.parameters)
                     if (!subscriber.unsubscribed) {
-                        subscriber.onNext(new TestCaseResult(testCase: testCase, result: response.data.result))
+                        subscriber.onNext(new TestCaseResult(testCase: testCase, result: result, status: concludeStatus(testCase.expectedResult, result)))
                         subscriber.onCompleted()
                     }
                 } catch (exception) {
@@ -38,5 +39,13 @@ class TestCaseRunner {
                 }
             }
         } as Observable.OnSubscribe)
+    }
+
+    private String performRequest(Request request, Map<String, String> parameters) {
+        client."${request.method.toLowerCase()}"(path: request.path, query: parameters).data.result
+    }
+
+    private static String concludeStatus(String expected, String got) {
+        expected == got ? 'PASSED' : 'FAILED'
     }
 }
