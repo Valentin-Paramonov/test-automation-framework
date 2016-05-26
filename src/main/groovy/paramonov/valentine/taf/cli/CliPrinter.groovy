@@ -9,7 +9,7 @@ import paramonov.valentine.taf.suite.Suite
 class CliPrinter implements SuiteRunner.Printer {
     @Override
     void startSuite(Suite suite) {
-        println suite.name
+        println "o $suite.name"
     }
 
     @Override
@@ -19,11 +19,16 @@ class CliPrinter implements SuiteRunner.Printer {
 
     @Override
     void scenarioCompleted(ScenarioResult result) {
-        println "o $result.scenario.name"
+        println "+ $result.scenario.name"
         result.testCaseResults.each {
             println """||- $it.testCase.description
                        ||  ${it.testCase.parameters.collect { k, v -> "$k: $v" }.join(', ')}
                        ||  expected: $it.testCase.expectedResult, got: $it.result""".stripMargin()
         }
+    }
+
+    @Override
+    void finishSuite() {
+        println '+-###-+'
     }
 }

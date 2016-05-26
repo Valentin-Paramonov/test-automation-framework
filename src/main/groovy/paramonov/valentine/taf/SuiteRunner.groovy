@@ -12,6 +12,7 @@ class SuiteRunner {
         void startSuite(Suite suite)
         void printError(String message)
         void scenarioCompleted(ScenarioResult scenario)
+        void finishSuite()
     }
 
     private final Printer printer
@@ -46,6 +47,6 @@ class SuiteRunner {
     private finish() {
         executor.shutdown()
         client.shutdown()
-        println 'Finished'
+        printer.finishSuite()
     }
 }
