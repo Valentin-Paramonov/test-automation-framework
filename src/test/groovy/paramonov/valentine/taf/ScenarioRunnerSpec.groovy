@@ -14,7 +14,7 @@ class ScenarioRunnerSpec extends Specification {
     def testCaseRunner = Mock(TestCaseRunner)
     def scenarioRunner = new ScenarioRunner(executor, testCaseRunner)
 
-    def "Should invoke all the actors with expected arguments"() {
+    def "Should run all the test cases and assemble the scenario result"() {
         given:
             def testCase1 = new TestCase()
             def testCaseResult1 = new TestCaseResult(status: 'FAILED')

@@ -10,8 +10,6 @@ import spock.lang.Specification
 
 import java.util.concurrent.ExecutorService
 
-import static rx.Observable.empty
-
 class SuiteRunnerSpec extends Specification {
     def printer = Mock(SuiteRunner.Printer)
     def scenarioRunner = Mock(ScenarioRunner)
@@ -19,7 +17,7 @@ class SuiteRunnerSpec extends Specification {
     def client = Mock(RESTClient)
     def suiteRunner = new SuiteRunner(printer, scenarioRunner, executor, client)
 
-    def "Should invoke all the actors with expected arguments"() {
+    def "Should run all the scenarios, assemble the suite result, and finish"() {
         given:
             def scenario1 = new Scenario()
             def scenarioResult1 = new ScenarioResult()
