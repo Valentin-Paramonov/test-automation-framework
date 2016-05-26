@@ -4,6 +4,7 @@ import groovy.transform.PackageScope
 import paramonov.valentine.taf.suite.ScenarioResult
 import paramonov.valentine.taf.SuiteRunner
 import paramonov.valentine.taf.suite.Suite
+import paramonov.valentine.taf.suite.SuiteResult
 
 @PackageScope
 class CliPrinter implements SuiteRunner.Printer {
@@ -18,17 +19,19 @@ class CliPrinter implements SuiteRunner.Printer {
     }
 
     @Override
-    void scenarioCompleted(ScenarioResult result) {
-        println "+ $result.scenario.name"
-        result.testCaseResults.each {
-            println """||- $it.testCase.description
-                       ||  ${it.testCase.parameters.collect { k, v -> "$k: $v" }.join(', ')}
-                       ||  expected: $it.testCase.expectedResult, got: $it.result""".stripMargin()
-        }
+    void finishSuite(SuiteResult suite) {
+        println "|o +:$suite.scenarioCount -:$suite.passedTestCaseCount/$suite.testCaseCount"
     }
 
     @Override
-    void finishSuite() {
-        println '+-###-+'
+    void scenarioCompleted(ScenarioResult result) {
+        println "+ $result.scenario.name"
+        result.testCaseResults.each {
+            println "|- $it.testCase.description"
+            println "|  ${it.testCase.parameters.collect { k, v -> "$k: $v" }.join(', ')}"
+            println "|  expected: $it.testCase.expectedResult, got: $it.result"
+            println "|= $it.status"
+        }
+        println "|+ $result.passedTestCaseCount/$result.testCaseCount"
     }
 }
