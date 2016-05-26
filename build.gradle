@@ -65,6 +65,10 @@ jaxb {
 xjc.dependsOn downloadFreemindSchema
 compileJava.dependsOn xjc
 
+jar {
+    baseName = 'taf'
+}
+
 shadowJar {
     baseName = 'taf'
     classifier = ''
