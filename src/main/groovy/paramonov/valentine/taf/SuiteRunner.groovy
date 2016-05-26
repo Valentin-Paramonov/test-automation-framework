@@ -44,8 +44,8 @@ class SuiteRunner {
     }
 
     private finish() {
-        client.shutdown()
         executor.shutdown()
+        client.shutdown()
         println 'Finished'
     }
 }
