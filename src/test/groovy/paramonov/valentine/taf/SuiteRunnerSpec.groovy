@@ -38,8 +38,7 @@ class SuiteRunnerSpec extends Specification {
                 def suiteResult = args.first()
                 assert suiteResult.suite == suite
                 def scenarioResults = suiteResult.scenarioResults
-                assert scenarioResults.contains(scenarioResult1)
-                assert scenarioResults.contains(scenarioResult2)
+                assert scenarioResults.containsAll(scenarioResult1, scenarioResult2)
             }
             1 * executor.shutdown()
             1 * client.shutdown()
