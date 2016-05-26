@@ -1,7 +1,7 @@
 package paramonov.valentine.taf.cli
 
 import groovy.transform.PackageScope
-import paramonov.valentine.taf.ScenarioResult
+import paramonov.valentine.taf.suite.ScenarioResult
 import paramonov.valentine.taf.SuiteRunner
 import paramonov.valentine.taf.suite.Suite
 

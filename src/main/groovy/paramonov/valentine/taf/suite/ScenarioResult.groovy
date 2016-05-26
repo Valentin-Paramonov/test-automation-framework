@@ -1,6 +1,4 @@
-package paramonov.valentine.taf
-
-import paramonov.valentine.taf.suite.Scenario
+package paramonov.valentine.taf.suite
 
 class ScenarioResult {
     Scenario scenario

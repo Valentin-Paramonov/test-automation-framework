@@ -1,6 +1,7 @@
 package paramonov.valentine.taf
 
 import groovyx.net.http.RESTClient
+import paramonov.valentine.taf.suite.ScenarioResult
 import paramonov.valentine.taf.suite.Suite
 import rx.Observable
 

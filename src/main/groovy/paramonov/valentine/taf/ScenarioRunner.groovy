@@ -1,12 +1,15 @@
 package paramonov.valentine.taf
 
+import groovy.transform.PackageScope
 import paramonov.valentine.taf.suite.Scenario
+import paramonov.valentine.taf.suite.ScenarioResult
 import rx.Observable
 import rx.Subscriber
 
 import javax.inject.Inject
 import java.util.concurrent.ExecutorService
 
+@PackageScope
 class ScenarioRunner {
     private final ExecutorService executor
     private final TestCaseRunner testCaseRunner
