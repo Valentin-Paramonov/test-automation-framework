@@ -15,6 +15,6 @@ class TafModule {
     }
 
     @Provides @Singleton RESTClient client(@BaseUrl String baseUrl) {
-        new RESTClient(baseUrl)
+        new PoolingRestClient(baseUrl)
     }
 }
