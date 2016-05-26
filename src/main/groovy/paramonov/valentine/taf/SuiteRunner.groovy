@@ -1,5 +1,6 @@
 package paramonov.valentine.taf
 
+import groovyx.net.http.RESTClient
 import paramonov.valentine.taf.suite.Suite
 import rx.Observable
 
@@ -16,12 +17,14 @@ class SuiteRunner {
     private final Printer printer
     private final ScenarioRunner scenarioRunner
     private final ExecutorService executor
+    private final RESTClient client
 
     @Inject
-    SuiteRunner(Printer printer, ScenarioRunner scenarioRunner, ExecutorService executor) {
+    SuiteRunner(Printer printer, ScenarioRunner scenarioRunner, ExecutorService executor, RESTClient client) {
         this.printer = printer
         this.scenarioRunner = scenarioRunner
         this.executor = executor
+        this.client = client
     }
 
     void run(Suite suite) {
@@ -41,6 +44,7 @@ class SuiteRunner {
     }
 
     private finish() {
+        client.shutdown()
         executor.shutdown()
         println 'Finished'
     }
